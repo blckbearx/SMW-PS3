@@ -1,6 +1,6 @@
 ![SMW Banner](http://smw.supersanctuary.net/site/logo.png)
 
-# Super Mario War PS3 1.8_r5 [![Releases](https://img.shields.io/github/release/blckbearx/SMW-ps3)](https://github.com/blckbearx/SMW-ps3/releases/latest)
+# Super Mario War PS3 [![Releases](https://img.shields.io/github/release/blckbearx/SMW-ps3)](https://github.com/blckbearx/SMW-ps3/releases/latest)
 
 Super Mario War game for the PS3.
 
