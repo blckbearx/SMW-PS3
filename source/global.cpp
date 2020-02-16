@@ -119,16 +119,16 @@ short controlkeys[2][2][4][NUM_KEYS] = { { { {SDLK_LEFT, SDLK_RIGHT, SDLK_UP, SD
 												  {SDLK_p, SDLK_SEMICOLON, SDLK_l, SDLK_QUOTE, SDLK_LEFTBRACKET, SDLK_o, SDLK_UNKNOWN, SDLK_UNKNOWN} } },
 
 												  //left, right, jump, down, turbo, powerup, start, cancel
-											  { { {JOY_STICK_1_LEFT, JOY_STICK_1_RIGHT, 21, JOY_STICK_1_DOWN, 20, 23, 16, 19},
-												  {JOY_STICK_1_LEFT, JOY_STICK_1_RIGHT, 21, JOY_STICK_1_DOWN, 20, 23, 16, 19},
-												  {JOY_STICK_1_LEFT, JOY_STICK_1_RIGHT, 21, JOY_STICK_1_DOWN, 20, 23, 16, 19},
-												  {JOY_STICK_1_LEFT, JOY_STICK_1_RIGHT, 21, JOY_STICK_1_DOWN, 20, 23, 16, 19} },
+											  { { {12, 14, 21, 13, 20, 23, 16, 19},
+												  {12, 14, 21, 13, 20, 23, 16, 19},
+												  {12, 14, 21, 13, 20, 23, 16, 19},
+												  {12, 14, 21, 13, 20, 23, 16, 19} },
 											
 												  //up, down, left, right, select, cancel, random, fast scroll
-												{ {JOY_STICK_1_UP, JOY_STICK_1_DOWN, JOY_STICK_1_LEFT, JOY_STICK_1_RIGHT, 21, 22, 14, 15},
-												  {JOY_STICK_1_UP, JOY_STICK_1_DOWN, JOY_STICK_1_LEFT, JOY_STICK_1_RIGHT, 21, 22, 14, 15},
-												  {JOY_STICK_1_UP, JOY_STICK_1_DOWN, JOY_STICK_1_LEFT, JOY_STICK_1_RIGHT, 21, 22, 14, 15},
-												  {JOY_STICK_1_UP, JOY_STICK_1_DOWN, JOY_STICK_1_LEFT, JOY_STICK_1_RIGHT, 21, 22, 14, 15} } } };
+												{ {15, 13, 12, 14, 21, 22, 20, 23},
+												  {15, 13, 12, 14, 21, 22, 20, 23},
+												  {15, 13, 12, 14, 21, 22, 20, 23},
+												  {15, 13, 12, 14, 21, 22, 20, 23} } } };
 
 
 const char * GameInputNames[NUM_KEYS] = {"Left", "Right", "Jump", "Down", "Turbo", "Use Item", "Pause", "Exit"};

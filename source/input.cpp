@@ -346,28 +346,28 @@ void CPlayerInput::Update(SDL_Event event, short iGameState)
                                         bool fUseJoystickInput = false;
                                         bool fJoystickDown = false;
                                         
-                                        if(event.jaxis.axis == 0 && inputControl->keys[iKey] == JOY_STICK_1_LEFT)
+                                        if(event.jaxis.axis == 0 && inputControl->keys[iKey] == 12)
                                         {
                                                 fUseJoystickInput = true;
 
                                                 if(event.jaxis.value < -JOYSTICK_DEAD_ZONE)
                                                         fJoystickDown = true;
                                         }
-                                        else if(event.jaxis.axis == 0 && inputControl->keys[iKey] == JOY_STICK_1_RIGHT)
+                                        else if(event.jaxis.axis == 0 && inputControl->keys[iKey] == 14)
                                         {
                                                 fUseJoystickInput = true;
 
                                                 if(event.jaxis.value > JOYSTICK_DEAD_ZONE)
                                                         fJoystickDown = true;
                                         }
-                                        else if(event.jaxis.axis == 1 && inputControl->keys[iKey] == JOY_STICK_1_UP)
+                                        else if(event.jaxis.axis == 1 && inputControl->keys[iKey] == 15)
                                         {
                                                 fUseJoystickInput = true;
 
                                                 if(event.jaxis.value < -JOYSTICK_DEAD_ZONE)
                                                         fJoystickDown = true;
                                         }
-                                        else if(event.jaxis.axis == 1 && inputControl->keys[iKey] == JOY_STICK_1_DOWN)
+                                        else if(event.jaxis.axis == 1 && inputControl->keys[iKey] == 13)
                                         {
                                                 fUseJoystickInput = true;
 
