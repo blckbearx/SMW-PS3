@@ -1,0 +1,28 @@
+Button number to be used in 'global.cpp' and 'input.cpp' for input configuration.
+
+D-Pad:
+- Left: 12
+- Down: 13
+- Right: 14
+- Up: 15
+
+Buttons:
+- Start: 16
+- R3: Unknown (maybe 17)
+- L3: Unknown (maybe 18)
+- Select: 19
+- Square: 20
+- Cross: 21
+- Circle: 22
+- Triangle: 23
+- PS: Unknown (probably not even registered as it loads the in-game XMB)
+
+Triggers:
+- L1: Unknown
+- L2: Unknown (maybe analog data)
+- R1: Unknown
+- R2: Unknown (maybe analog data)
+
+Analogs:
+- L: Analog data
+- R: Analog data
