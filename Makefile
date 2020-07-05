@@ -33,7 +33,7 @@ CONTENTID	:=	UP0001-$(APPID)_00-0000000000000000
 # options for code generation
 #---------------------------------------------------------------------------------
 
-CFLAGS		=	-O2 -Wall -mcpu=cell $(MACHDEP) $(INCLUDE)
+CFLAGS		=	-O2 -Wall -mcpu=cell -Wno-narrowing $(MACHDEP) $(INCLUDE)
 CXXFLAGS	=	$(CFLAGS)
 
 LDFLAGS		=	$(MACHDEP) -Wl,-Map,$(notdir $@).map
@@ -112,7 +112,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(OUTPUT).elf $(OUTPUT).self $(OUTPUT).pkg EBOOT.BIN
+	@rm -fr $(BUILD) $(OUTPUT).elf $(OUTPUT).self $(OUTPUT).pkg EBOOT.BIN $(OUTPUT).fake.self $(OUTPUT).gnpdrm.pkg
 
 #---------------------------------------------------------------------------------
 run:
@@ -120,6 +120,7 @@ run:
 
 #---------------------------------------------------------------------------------
 pkg:	$(BUILD) $(OUTPUT).pkg
+		@rm $(OUTPUT).gnpdrm.pkg
 
 #---------------------------------------------------------------------------------
 

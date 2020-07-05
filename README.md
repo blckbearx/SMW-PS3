@@ -26,10 +26,8 @@ Super Mario War game for the PS3.
 
 What you'll need:
 
-* The [PS3 Toolchain](https://github.com/ps3dev/ps3toolchain) compiled for your OS (I use [PSDK3v2](https://github.com/Estwald/PSDK3v2) precompiled for Windows, which already includes PSL1GHT and PS3 Libraries).
-* [PSL1GHT Libraries](https://github.com/ps3dev/PSL1GHT)
-* [PS3 Libraries](https://github.com/ps3dev/ps3libraries)
-* In case you're using the pre-compiled PSDK3v2 on Windows you'll also need libvorbis (provided as a zip in this repo, open the zip file and extract the folder next to the PSDK3v2 folder to merge them).
+* The [PS3 Toolchain](https://github.com/ps3dev/ps3toolchain) compiled for your OS.
+* In case you're using the pre-compiled PSDK3v2 on Windows you'll also need libvorbis (provided as a zip in this repo, open the zip file and extract the folder next to the PSDK3v2 folder to merge them) The game won't have music though.
 
 ## Installing on PS3
 
