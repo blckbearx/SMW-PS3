@@ -20,8 +20,7 @@ BUILD		:=	build
 SOURCES		:=	source
 DATA		:=	smw
 INCLUDES	:=	include
-ICON0       :=  ICON0.png
-PIC1		:=	PIC1.png
+ICON0       :=  ICON0.PNG
 PKGFILES	:=	$(CURDIR)/pkgfiles
 SFOXML		:=	sfo.xml
 
