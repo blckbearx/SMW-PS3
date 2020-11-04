@@ -123,8 +123,8 @@ pkg:	$(BUILD) $(OUTPUT).pkg
 
 #---------------------------------------------------------------------------------
 
-npdrm: $(BUILD)
-	@$(SELF_NPDRM) $(SCETOOL_FLAGS) --np-content-id=$(CONTENTID) --encrypt $(BUILDDIR)/$(basename $(notdir $(OUTPUT))).elf $(BUILDDIR)/../EBOOT.BIN
+npdrm:	$(BUILD)
+	@$(SELF_NPDRM) $(BUILDDIR)/$(basename $(notdir $(OUTPUT))).elf $(BUILDDIR)/../EBOOT.BIN $(CONTENTID)
 
 #---------------------------------------------------------------------------------
 else
