@@ -27,6 +27,8 @@ SFOXML		:=	sfo.xml
 TITLE		:=	Super Mario War
 APPID		:=	SMW00PS33
 CONTENTID	:=	UP0001-$(APPID)_00-0000000000000000
+APPVERSION	:=	$(shell xmlstarlet sel -t -v "//value[@name='APP_VER']" $(CURDIR)/$(SFOXML))
+RELEASEVER	:=	$(shell echo $(APPVERSION) | sed -r 's/8./.8_r/g' | sed -r 's/0//g')
 
 #---------------------------------------------------------------------------------
 # options for code generation
@@ -111,7 +113,7 @@ $(BUILD):
 #---------------------------------------------------------------------------------
 clean:
 	@echo clean ...
-	@rm -fr $(BUILD) $(OUTPUT).elf $(OUTPUT).self $(OUTPUT).pkg EBOOT.BIN $(OUTPUT).fake.self $(OUTPUT).gnpdrm.pkg
+	@rm -fr $(BUILD) $(OUTPUT).elf $(OUTPUT).self $(OUTPUT).pkg EBOOT.BIN $(OUTPUT).fake.self $(OUTPUT).gnpdrm.pkg *.pkg
 
 #---------------------------------------------------------------------------------
 run:
@@ -119,7 +121,7 @@ run:
 
 #---------------------------------------------------------------------------------
 pkg:	$(BUILD) $(OUTPUT).pkg
-		@rm $(OUTPUT).gnpdrm.pkg
+		@rm $(OUTPUT).gnpdrm.pkg && mv $(OUTPUT).pkg Super_Mario_War-$(RELEASEVER).pkg
 
 #---------------------------------------------------------------------------------
 
