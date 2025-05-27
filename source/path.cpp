@@ -120,7 +120,7 @@ const string convertPath(const string& source)
 
 				if(ret == 0)
 				{
-					strcpy(SMW_Root_Data_Dir, "/dev_usb000/smw/");
+					strcpy(SMW_Root_Data_Dir, "/dev_usb00%d/smw",i);
 					break;
 				}
 			}
