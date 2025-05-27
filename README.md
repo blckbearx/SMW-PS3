@@ -1,10 +1,10 @@
-![SMW Banner](http://smw.supersanctuary.net/site/logo.png)
+![logo](https://github.com/user-attachments/assets/2ad2defc-d816-4432-9e5f-813fcccb2154)
 
 # Super Mario War PS3 [![Releases](https://img.shields.io/github/release/blckbearx/SMW-ps3)](https://github.com/blckbearx/SMW-ps3/releases/latest)
 
 Super Mario War game for the PS3.
 
-[The original port by lachrymose can be found here.](https://gamebrew.org/images/1/18/SuperMarioWar_R2.zip)
+[The original port by lachrymose can be found here.](https://archive.org/details/super-mario-war-r-2-original)
 
 ## Repo explanation
 
