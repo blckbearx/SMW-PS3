@@ -7,39 +7,40 @@
 #Special music
 #Bonus plays in bonus houses
 [Bonus]
-bonushouse.ogg
+ToadHouse.ogg
 
 #Sleep plays when a music box world item is used
 [Sleep]
-sleep.ogg
+MusicBox.ogg
 
 #Standard world categories that are settable from the world editor
 [Grass]
-grassland.ogg
+GrassLand.ogg
 
 [Desert]
-desert.ogg
+DesertHill.ogg
 
 [Water]
-water.ogg
+SeaSide.ogg
 
 [Giant]
-giant.ogg
+GiantIsland.ogg
 
 [Sky]
-sky.ogg
+TheSky.ogg
+TheSky2.ogg
 
 [Ice]
-ice.ogg
+IceLand.ogg
 
 [Pipe]
-pipe.ogg
+PipeMaze.ogg
 
 [Dark]
-bowser.ogg
+BowserCastle.ogg
 
 [Space]
-space.ogg
+StarWorld.ogg
 
 #The section below is for selecting music for a specific world
 #The format is "WorldName,MusicFile".  Only one music file can be

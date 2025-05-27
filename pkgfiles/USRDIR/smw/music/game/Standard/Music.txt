@@ -16,49 +16,82 @@ Special/tournamentover.ogg
 #"Underground", etc will be read into those categories as well.
 
 [Land]
-smb3level1.ogg
-M2_Level1.ogg
+SMB_Overground.ogg
+SMB_Forest.ogg
+SMB2_Overground.ogg
+SMB3_Overground.ogg
 
 [Underground]
-M1_Underground.ogg
-M3_Boss.ogg
+SMB_Underground.ogg
+SMB2_Underground.ogg
+SMB3_Boss.ogg
 
 [Underwater]
-M3_Underwater.ogg
+SMB_Underwater.ogg
+SMB3_Underwater.ogg
 
 [Castle]
-M3_Boss.ogg
+SMB_Castle.ogg
+SMB_Battle.ogg
+SMB3_Castle.ogg
+SMB3_Airship.ogg
+SMB3_Boss.ogg
 
 #These are not needed (see ReadMe.txt), because they have the same
 #tracks as the above 4 categories, but I included them for easy editing
 #purposes.
 
 [Platforms]
-smb3level1.ogg
-M2_Level1.ogg
+SMB_Overground.ogg
+SMB_Athletic.ogg
+SMB_Airship.ogg
+SMB2_Overground.ogg
+SMB3_Overground.ogg
+SMB3_Athletic.ogg
+SMB3_Airship.ogg
 
 [Ghost]
-M1_Underground.ogg
-M3_Boss.ogg
+SMB_Ghost.ogg
+SMB_Underground.ogg
+SMB_Castle.ogg
+SMB2_Underground.ogg
+SMB3_Ghost.ogg
+SMB3_Castle.ogg
 
 [Bonus]
-M3_Underwater.ogg
+SMB_Bonus.ogg
+SMB3_Sky.ogg
+SMB_Underwater.ogg
 
 [Battle]
-M3_Boss.ogg
+SMB3_Battle.ogg
+SMB_Battle.ogg
+SMB2_Boss.ogg
+SMB3_Boss.ogg
+SMB3_Airship.ogg
 
 [Desert]
-smb3level1.ogg
-M2_Level1.ogg
+SMB_Desert.ogg
+SMB_Overground.ogg
+SMB2_Overground.ogg
+SMB3_Overground.ogg
 
 [Clouds]
-smb3level1.ogg
-M2_Level1.ogg
+SMB_Overground.ogg
+SMB_Athletic.ogg
+SMB_Airship.ogg
+SMB2_Overground.ogg
+SMB3_Overground.ogg
+SMB3_Athletic.ogg
+SMB3_Airship.ogg
 
 [Snow]
-smb3level1.ogg
-M2_Level1.ogg
-
+SMB_Snow.ogg
+SMB_Overground.ogg
+SMB2_Overground.ogg
+SMB3_Snow.ogg
+SMB3_Overground.ogg
+SMB3_Athletic.ogg
 
 #These are special tags that allow you to force which music is played
 #for a specific map or a specific background.  Please use these 
@@ -73,7 +106,6 @@ M2_Level1.ogg
 
 [Backgrounds]
 #Land_Classic.png,smb3level1.ogg,M2_Level1.ogg
-
 
 #Mapping of how the old backgrounds map to the new music categories by
 #default.
