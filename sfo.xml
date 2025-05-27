@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE sfo [
-    <!ENTITY appver "18.07">
+    <!ENTITY appver "18.08">
 ]>
 <sfo>
    <value name="APP_VER" type="string">&appver;</value>
