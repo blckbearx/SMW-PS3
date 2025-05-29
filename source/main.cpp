@@ -677,6 +677,7 @@ STextAward awards[PAWARD_LAST] = {
 sfxSound sfx_announcer[PANNOUNCER_SOUND_LAST];
 
 bool  fResumeMusic = true;
+bool  isLoadingMusic = true;
 
 sfxSound sfx_mip;
 sfxSound sfx_deathsound;
@@ -962,12 +963,38 @@ sfxSound * g_PlayingSoundChannels[NUM_SOUND_CHANNELS];
 
 void DECLSPEC soundfinished(int channel)
 {
-	if(!g_PlayingSoundChannels[channel])
-		printf("Error: SoundFinished() tried to clear a channel that was already cleared!\n");
-	else
+	if(channel == 16 && !isLoadingMusic)
 	{
-		g_PlayingSoundChannels[channel]->clearchannel();
-		g_PlayingSoundChannels[channel] = NULL;
+		if(!game_values.music)
+			return;
+
+		if(game_values.gamestate == GS_GAME && !game_values.gamemode->gameover)
+		{
+			if(game_values.playnextmusic)
+			{
+				musiclist.SetNextMusic(g_map.musicCategoryID, maplist.currentShortmapname(), g_map.szBackgroundFile);
+				backgroundmusic[0].load(musiclist.GetCurrentMusic()); //In Game Music
+			}
+
+			backgroundmusic[0].play(game_values.playnextmusic, false);
+		}
+		else
+		{
+			if(fResumeMusic)
+			{
+				backgroundmusic[3].play(false, false);
+			}
+		}
+	}
+	else if(channel < 16)
+	{
+		if(!g_PlayingSoundChannels[channel])
+			printf("Error: SoundFinished() tried to clear a channel that was already cleared!\n");
+		else
+		{
+			g_PlayingSoundChannels[channel]->clearchannel();
+			g_PlayingSoundChannels[channel] = NULL;
+		}
 	}
 }
 

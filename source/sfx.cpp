@@ -9,6 +9,8 @@ using namespace std;
 	#endif
 #endif
 
+extern bool isLoadingMusic;
+
 extern bool fResumeMusic;
 extern void DECLSPEC soundfinished(int channel);
 extern void DECLSPEC musicfinished();
@@ -17,8 +19,8 @@ extern sfxSound * g_PlayingSoundChannels[NUM_SOUND_CHANNELS];
 
 bool sfx_init()
 {
-	Mix_OpenAudio(44100, AUDIO_S16MSB, 2, 2048);
-	Mix_AllocateChannels(NUM_SOUND_CHANNELS);
+	Mix_OpenAudio(22050, AUDIO_S16MSB, 2, 2048);
+	Mix_AllocateChannels(NUM_SOUND_CHANNELS+1);
 
 	for(short iChannel = 0; iChannel < NUM_SOUND_CHANNELS; iChannel++)
 		g_PlayingSoundChannels[iChannel] = NULL;
@@ -33,20 +35,22 @@ void sfx_close()
 
 void sfx_stopallsounds()
 {
-	Mix_HaltChannel(-1);
-
 	for(short iChannel = 0; iChannel < NUM_SOUND_CHANNELS; iChannel++)
+	{
+		Mix_HaltChannel(iChannel);
 		g_PlayingSoundChannels[iChannel] = NULL;
+	}
 }
 
 void sfx_setmusicvolume(int volume)
 {
-	Mix_VolumeMusic(volume);
+	Mix_Volume(NUM_SOUND_CHANNELS, volume);
 }
 
 void sfx_setsoundvolume(int volume)
 {
-	Mix_Volume(-1, volume);
+	for(short iChannel = 0; iChannel < NUM_SOUND_CHANNELS; iChannel++)
+	Mix_Volume(iChannel, volume);
 }
 
 sfxSound::sfxSound()
@@ -174,6 +178,8 @@ sfxMusic::sfxMusic()
 	paused = false;
 	ready = false;
 	music = NULL;
+	music_chunk = NULL;
+	channel = NUM_SOUND_CHANNELS;
 }
 
 sfxMusic::~sfxMusic()
@@ -181,19 +187,37 @@ sfxMusic::~sfxMusic()
 
 bool sfxMusic::load(const string& filename)
 {
-	if(music)
+// 	if(music)
+// 		reset();
+//
+//     cout << "load " << filename << "..." << endl;
+// 	music = Mix_LoadMUS(filename.c_str());
+//
+// 	if(!music)
+// 	{
+// 	    printf("Error Loading Music: %s\n", Mix_GetError());
+// 		return false;
+// 	}
+//
+// 	Mix_HookMusicFinished(&musicfinished);
+//
+// 	ready = true;
+//
+// 	return true;
+
+	if(music_chunk)
 		reset();
 
-    cout << "load " << filename << "..." << endl;
-	music = Mix_LoadMUS(filename.c_str());
-	
-	if(!music)
+	cout << "load " << filename << "..." << endl;
+	music_chunk = Mix_LoadWAV(filename.c_str());
+
+	if(music_chunk == NULL)
 	{
-	    printf("Error Loading Music: %s\n", Mix_GetError());
+		printf(" failed!\n");
 		return false;
 	}
 
-	Mix_HookMusicFinished(&musicfinished);
+	Mix_ChannelFinished(&soundfinished);
 
 	ready = true;
 
@@ -202,35 +226,61 @@ bool sfxMusic::load(const string& filename)
 
 void sfxMusic::play(bool fPlayonce, bool fResume)
 {
-	Mix_PlayMusic(music, fPlayonce ? 0 : -1);
+	// Mix_PlayMusic(music, fPlayonce ? 0 : -1);
+	// fResumeMusic = fResume;
+
+	isLoadingMusic = true;
+	Mix_PlayChannel(channel, music_chunk, fPlayonce ? 0 : -1);
 	fResumeMusic = fResume;
+	SDL_Delay(10);
+	isLoadingMusic = false;
+
 }
 
 void sfxMusic::stop()
 {
-	Mix_HaltMusic();
+	// Mix_HaltMusic();
+
+	Mix_HaltChannel(channel);
+
 }
 
 void sfxMusic::sfx_pause()
 {
+	// paused = !paused;
+ //
+	// if(paused)
+	// 	Mix_PauseMusic();
+	// else
+	// 	Mix_ResumeMusic();
+
 	paused = !paused;
 
 	if(paused)
-		Mix_PauseMusic();
+		Mix_Pause(channel);
 	else
-		Mix_ResumeMusic();
+		Mix_Resume(channel);
+
 }
 
 void sfxMusic::reset()
 {
-	Mix_FreeMusic(music);
-	music = NULL;
+	// Mix_FreeMusic(music);
+	// music = NULL;
+	// ready = false;
+
+	Mix_FreeChunk(music_chunk);
+	music_chunk = NULL;
 	ready = false;
+
 }
 
 int sfxMusic::isplaying()
 {
-	return Mix_PlayingMusic();
+	// return Mix_PlayingMusic();
+
+	return Mix_Playing(channel);
+
 }
 
 

@@ -62,5 +62,7 @@ class sfxMusic
 		Mix_Music *music;
 		bool paused;
 		bool ready;
+		Mix_Chunk* music_chunk;
+		int channel;
 };
 
