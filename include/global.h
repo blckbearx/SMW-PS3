@@ -314,7 +314,6 @@ extern STextAward		awards[PAWARD_LAST];
 extern sfxSound			sfx_announcer[PANNOUNCER_SOUND_LAST];
 
 extern bool fResumeMusic;
-extern bool isLoadingMusic;
 
 extern sfxSound			sfx_mip;
 extern sfxSound			sfx_deathsound;

@@ -9,8 +9,6 @@ using namespace std;
 	#endif
 #endif
 
-extern bool isLoadingMusic;
-
 extern bool fResumeMusic;
 extern void DECLSPEC soundfinished(int channel);
 extern void DECLSPEC musicfinished();
@@ -229,11 +227,8 @@ void sfxMusic::play(bool fPlayonce, bool fResume)
 	// Mix_PlayMusic(music, fPlayonce ? 0 : -1);
 	// fResumeMusic = fResume;
 
-	isLoadingMusic = true;
 	Mix_PlayChannel(channel, music_chunk, fPlayonce ? 0 : -1);
 	fResumeMusic = fResume;
-	SDL_Delay(10);
-	isLoadingMusic = false;
 
 }
 

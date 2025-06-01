@@ -677,7 +677,6 @@ STextAward awards[PAWARD_LAST] = {
 sfxSound sfx_announcer[PANNOUNCER_SOUND_LAST];
 
 bool  fResumeMusic = true;
-bool  isLoadingMusic = true;
 
 sfxSound sfx_mip;
 sfxSound sfx_deathsound;
@@ -963,7 +962,7 @@ sfxSound * g_PlayingSoundChannels[NUM_SOUND_CHANNELS];
 
 void DECLSPEC soundfinished(int channel)
 {
-	if(channel == 16 && !isLoadingMusic)
+	if(channel == 16)
 	{
 		if(!game_values.music)
 			return;
