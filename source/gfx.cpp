@@ -95,7 +95,7 @@ bool gfx_loadpalette()
 
 	SDL_Surface * palette = IMG_Load(convertPathCP("gfx/packs/palette.bmp", gamegraphicspacklist.current_name()));
 
-	if ( palette == NULL ) 
+	if ( palette == NULL )
 	{
         printf("Couldn't load color palette: %s\n", SDL_GetError());
 		return false;
@@ -146,7 +146,7 @@ bool gfx_loadpalette()
 			counter += palette->pitch - palette->w * 3;
 		}
 	}
-	
+
     if (SDL_MUSTLOCK(palette))
         SDL_UnlockSurface(palette);
 
@@ -202,7 +202,7 @@ SDL_Surface * gfx_createskinsurface(SDL_Surface * skin, short spriteindex, Uint8
 
 	//Blit over loaded skin into player image set
 	SDL_Surface * temp = SDL_CreateRGBSurface(skin->flags, 32 * loops, 32, skin->format->BitsPerPixel, skin->format->Rmask, skin->format->Gmask, skin->format->Bmask, skin->format->Amask);
-	
+
 	//Take the loaded skin and colorize it for each state (normal, 3 frames of invincibiliy, shielded, tagged, ztarred. got shine)
 	if(SDL_MUSTLOCK(temp))
 		SDL_LockSurface(temp);
@@ -244,7 +244,7 @@ SDL_Surface * gfx_createskinsurface(SDL_Surface * skin, short spriteindex, Uint8
 						temppixels[tempcounter + k * 96 + reverseoffset + iGreenOffset] = colorschemes[colorScheme][k][1][m];
 						temppixels[tempcounter + k * 96 + reverseoffset + iBlueOffset] = colorschemes[colorScheme][k][2][m];
 					}
-					
+
 					fFoundColor = true;
 					break;
 				}
@@ -401,14 +401,14 @@ bool gfx_loadfullskin(gfxSprite ** gSprites, const std::string& filename, Uint8 
 	gSprites[9]->setSurface(skinSurface);
 
 	SDL_FreeSurface(skin);
-	
+
 	return true;
 }
 
 SDL_Surface * gfx_createteamcoloredsurface(SDL_Surface * sImage, short iColor, Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
 	SDL_Surface * sTempImage = SDL_CreateRGBSurface(sImage->flags, iColor == -2 ? sImage->w << 2 : sImage->w, iColor == -1 ? sImage->h << 2 : sImage->h, sImage->format->BitsPerPixel, sImage->format->Rmask, sImage->format->Gmask, sImage->format->Bmask, sImage->format->Amask);
-	
+
 	//Take the loaded image and colorize it
 	if(SDL_MUSTLOCK(sTempImage))
 		SDL_LockSurface(sTempImage);
@@ -421,7 +421,7 @@ SDL_Surface * gfx_createteamcoloredsurface(SDL_Surface * sImage, short iColor, U
 	int iDstPixelCounter = 0;
 
 	int iNextImageOffset = 0;
-	
+
 	if(iColor == -1)
 		iNextImageOffset = sImage->pitch * sImage->h;
 	else if(iColor == -2)
@@ -553,7 +553,7 @@ bool gfx_loadteamcoloredimage(gfxSprite ** gSprites, const std::string& filename
 
 	SDL_FreeSurface(sImage);
 
-	
+
 	return true;
 }
 
@@ -581,7 +581,7 @@ bool gfx_loadteamcoloredimage(gfxSprite * gSprites, const std::string& filename,
 	gSprites->SetWrap(fWrap);
 
 	SDL_FreeSurface(sImage);
-	
+
 	return true;
 }
 
@@ -625,7 +625,7 @@ void gfx_cliprect(SDL_Rect * srcRect, SDL_Rect * dstRect, short x, short y, shor
 		srcRect->w -= iDiffX;
 		//dstRect->w -= iDiffX;
 	}
-	
+
 	if(dstRect->y < y)
 	{
 		short iDiffY = y - dstRect->y;
@@ -731,7 +731,7 @@ void gfx_drawpreview(SDL_Surface * surface, short dstX, short dstY, short srcX, 
 			rDstRect.x = dstX - 320;
 			fBlitSide = true;
 		}
-			
+
 		if(fBlitSide)
 		{
 			//need to set source rect before each blit so it can be clipped correctly
@@ -814,7 +814,7 @@ gfxSprite::gfxSprite()
 
 gfxSprite::~gfxSprite()
 {
-	//free the allocated surface 
+	//free the allocated surface
 	freeSurface();
 }
 
@@ -880,7 +880,7 @@ bool gfxSprite::init(const std::string& filename, Uint8 r, Uint8 g, Uint8 b, boo
 
 bool gfxSprite::init(const std::string& filename, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool fUseAccel)
 {
-    cout << "Loading sprite " << filename << " ...";
+	cout << "Loading sprite " << filename << " ...";
 
 	if(m_picture)
 	{
@@ -888,45 +888,121 @@ bool gfxSprite::init(const std::string& filename, Uint8 r, Uint8 g, Uint8 b, Uin
 		m_picture = NULL;
 	}
 
-    // Load the BMP file into a surface
-	m_picture = IMG_Load(filename.c_str());
+	// Load the BMP file into a surface
+	SDL_Surface* loaded = IMG_Load(filename.c_str());
 
-    if (!m_picture)
+	if (!loaded)
 	{
-        cout << endl << " ERROR: Couldn't load "
-             << filename << ": " << SDL_GetError() << endl;
-        return false;
-    }
-
-	if( SDL_SetColorKey(m_picture, SDL_SRCCOLORKEY | (fUseAccel ? SDL_RLEACCEL : 0), SDL_MapRGB(m_picture->format, r, g, b)) < 0)
-	{
-        cout << endl << " ERROR: Couldn't set ColorKey + RLE for "
-             << filename << ": " << SDL_GetError() << endl;
+		cout << endl << " ERROR: Couldn't load "
+		<< filename << ": " << SDL_GetError() << endl;
 		return false;
 	}
 
-	if( (SDL_SetAlpha(m_picture, SDL_SRCALPHA | (fUseAccel ? SDL_RLEACCEL : 0), a)) < 0)
+	// Create a new surface with alpha channel
+	SDL_Surface* withAlpha = SDL_CreateRGBSurface(
+		SDL_SWSURFACE,
+		loaded->w,
+		loaded->h,
+		32,
+		0x000000FF,
+		0x0000FF00,
+		0x00FF0000,
+		0xFF000000
+	);
+
+	if (!withAlpha)
 	{
-        cout << endl << " ERROR: Couldn't set per-surface alpha on "
-             << filename << ": " << SDL_GetError() << endl;
+		cout << endl << " ERROR: Couldn't create alpha surface for "
+		<< filename << ": " << SDL_GetError() << endl;
+		SDL_FreeSurface(loaded);
 		return false;
 	}
-	
-	SDL_Surface *temp = SDL_DisplayFormatAlpha(m_picture);
+
+	// Lock both surfaces for pixel access
+	if(SDL_MUSTLOCK(loaded))
+		SDL_LockSurface(loaded);
+	if(SDL_MUSTLOCK(withAlpha))
+		SDL_LockSurface(withAlpha);
+
+	// Get the colorkey value in the source format
+	Uint32 colorkey = SDL_MapRGB(loaded->format, r, g, b);
+
+	// Copy pixels and set alpha based on colorkey
+	for(int y = 0; y < loaded->h; y++)
+	{
+		for(int x = 0; x < loaded->w; x++)
+		{
+			Uint32 pixel;
+			Uint8 red, green, blue;
+
+			// Get pixel from source surface
+			int bpp = loaded->format->BytesPerPixel;
+			Uint8* p = (Uint8*)loaded->pixels + y * loaded->pitch + x * bpp;
+
+			switch(bpp)
+			{
+				case 1:
+					pixel = *p;
+					break;
+				case 2:
+					pixel = *(Uint16*)p;
+					break;
+				case 3:
+					if(SDL_BYTEORDER == SDL_BIG_ENDIAN)
+						pixel = p[0] << 16 | p[1] << 8 | p[2];
+				else
+					pixel = p[0] | p[1] << 8 | p[2] << 16;
+				break;
+				case 4:
+					pixel = *(Uint32*)p;
+					break;
+				default:
+					pixel = 0;
+			}
+
+			SDL_GetRGB(pixel, loaded->format, &red, &green, &blue);
+
+			// Check if this pixel matches the colorkey
+			Uint8 alpha;
+			if(pixel == colorkey || (red == r && green == g && blue == b))
+			{
+				alpha = 0; // Fully transparent for colorkey pixels
+			}
+			else
+			{
+				alpha = a; // Use specified alpha for other pixels
+			}
+
+			// Write to destination surface
+			Uint32* destPixel = (Uint32*)((Uint8*)withAlpha->pixels + y * withAlpha->pitch + x * 4);
+			*destPixel = SDL_MapRGBA(withAlpha->format, red, green, blue, alpha);
+		}
+	}
+
+	if(SDL_MUSTLOCK(loaded))
+		SDL_UnlockSurface(loaded);
+	if(SDL_MUSTLOCK(withAlpha))
+		SDL_UnlockSurface(withAlpha);
+
+	SDL_FreeSurface(loaded);
+
+	// Convert to display format with alpha
+	SDL_Surface* temp = SDL_DisplayFormatAlpha(withAlpha);
 	if(!temp)
 	{
-        cout << endl << " ERROR: Couldn't convert "
-             << filename << " to the display's pixel format: " << SDL_GetError()
-             << endl;
+		cout << endl << " ERROR: Couldn't convert "
+		<< filename << " to display format: " << SDL_GetError() << endl;
+		SDL_FreeSurface(withAlpha);
 		return false;
 	}
-	SDL_FreeSurface(m_picture);
+
+	SDL_FreeSurface(withAlpha);
 	m_picture = temp;
 
 	m_bltrect.w = (Uint16)m_picture->w;
 	m_bltrect.h = (Uint16)m_picture->h;
 
-    cout << "done" << endl;
+	cout << "done" << endl;
 	return true;
 }
 
@@ -1173,7 +1249,7 @@ void gfxFont::drawChopRight(int x, int y, int width, const char *s)
 {
 	//if(y + getHeight() < 0)
 	//	return;
-		
+
 	SFont_WriteChopRight(blitdest, m_font, x, y, width, s);
 }
 
@@ -1181,7 +1257,7 @@ void gfxFont::drawChopLeft(int x, int y, int width, const char *s)
 {
 	//if(y + getHeight() < 0)
 	//	return;
-		
+
 	SFont_WriteChopLeft(blitdest, m_font, x, y, width, s);
 }
 
@@ -1189,7 +1265,7 @@ void gfxFont::drawCentered(int x, int y, const char *text)
 {
 	//if(y + getHeight() < 0)
 	//	return;
-		
+
 	SFont_WriteCenter(blitdest, m_font, x, y, text);
 };
 
@@ -1197,7 +1273,7 @@ void gfxFont::drawChopCentered(int x, int y, int width, const char *text)
 {
 	//if(y + getHeight() < 0)
 	//	return;
-		
+
 	SFont_WriteChopCenter(blitdest, m_font, x, y, width, text);
 };
 
@@ -1212,7 +1288,7 @@ void gfxFont::drawRightJustified(int x, int y, const char *s, ...)
 
 	//if(y + getHeight() < 0)
 	//	return;
-		
+
 	SFont_WriteRight(blitdest, m_font, x, y, buffer);
 };
 
