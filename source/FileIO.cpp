@@ -17,7 +17,7 @@ FILE * OpenFile(const char * filename, const char * options)
 			#endif
 		#else
 			//std::string optionsbin = std::string(filename);
-			std::string optionsbin = std::string(SMW_Root_Data_Dir) + std::string("/") + std::string(filename);  // Change default path for PS3 Version.
+			std::string optionsbin = std::string(SMW_Root_Data_Dir) + std::string(filename);  // Change default path for PS3 Version.
 		#endif
 	#endif
 #endif
